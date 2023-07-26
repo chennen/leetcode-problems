@@ -28,11 +28,6 @@ const getTables = n => {
             const canUseThisTable = morePeopleThanThisTable ||
                 (lastPeopleCanFitOnThisTable && !smallerTableIsBetter)
 
-            //console.log("people remaining: ", peopleRemaining)
-            //console.log("lastPeopleCanFit", lastPeopleCanFitOnThisTable)
-            //console.log("smallerTableIsBetter", smallerTableIsBetter)
-            //console.log("canUseTable: ", canUseThisTable)
-
             const newUsedTables = canUseThisTable ? [...usedTables, currTable] : usedTables
             const newPeopleRemaining = canUseThisTable ? peopleRemaining - currTable : peopleRemaining
 
@@ -51,12 +46,5 @@ const getTables = n => {
 }
 
 
-// test cases:
+// run test cases
 testCases.forEach(n => console.log(n, ' ', getTables(n)))
-// getTables(2)) => [2]
-// getTables(10)) => [6, 4]
-// getTables(50)) => []
-// getTables(13)) => [6, 6, 4]
-// getTables(21)) => [6, 6, 4, 4, 4]
-
-// getTables(-2)) => []
