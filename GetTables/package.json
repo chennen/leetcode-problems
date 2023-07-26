@@ -1,0 +1,12 @@
+{
+  "name": "tournament-sim",
+  "version": "1.0.0",
+  "description": "Simulate tournament attendance and results",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "test"
+  },
+  "author": "chris hennen",
+  "license": "ISC"
+}
