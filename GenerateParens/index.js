@@ -1,24 +1,21 @@
 
 
-// if n > 0, can generate more solutions by
+// generate more solutions by
 // * add another ( to existing solution
 // * close one or more () and add another (
+// can finalize solutions by adding )s to close all unclosed (s
 
-// if n == 0, can only finalize solutions by adding )s to close all unclosed (s
 
-const generateParenthesesR = solutions => n =>
-    n == 0 ?  solutions.map(closeAllUnclosed)
-        : generateParenthesesR(generateNewSolutions(solutions))(n-1)
+// Helpers!
 
 // return a function that takes ...args
 // calls all functions in fns array passing same ...args
 // runs conv fn using the fns return values as arguments
 const converge = (conv, fns) => (...args) => conv(...fns.map(f => f(...args)))
 
-const countCharsInString = c => s => [...s].filter(x => x == c).length
+const countCharsInString = searchChar => searchString => [...searchString].filter(x => x == searchChar).length
 
-
-// countUnclosed("(((") => 3
+// ex: countUnclosed("(((") => 3
 const countUnclosed = converge(
     (leftParenCount, rightParenCount) => leftParenCount - rightParenCount,
     [
@@ -40,15 +37,19 @@ const closeUnclosedNewSolutions = solutions => {
  return oneMoreClosed.length > 0 ? [...oneMoreClosed, ...closeUnclosedNewSolutions(oneMoreClosed)] : []
 }
 
+// Solution!
+
 // start with a single '(' if no solutions yet
 // tack on a single '(' to all new solutions
 const generateNewSolutions = solutions =>
     solutions.length == 0 ? ['(']
         : [...solutions, ...closeUnclosedNewSolutions(solutions)].map(s => s + '(')
 
-// solution
+const generateParenthesesR = solutions => n =>
+    n == 0 ?  solutions.map(closeAllUnclosed)
+        : generateParenthesesR(generateNewSolutions(solutions))(n-1)
+
 const generateParentheses = generateParenthesesR([])
-    
 
 console.log(generateParentheses(5))
 console.log(generateParentheses(3))
