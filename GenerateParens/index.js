@@ -40,12 +40,11 @@ const closeUnclosedNewSolutions = solutions => {
  return oneMoreClosed.length > 0 ? [...oneMoreClosed, ...closeUnclosedNewSolutions(oneMoreClosed)] : []
 }
 
-const generateNewSolutions = solutions => {
-    newParenthesesSolutions = solutions.length == 0 ? ['('] : solutions.map(s => s + '(')
-    newClosedSolutions = closeUnclosedNewSolutions(solutions).map(s => s + '(')
-    return [...newParenthesesSolutions, ...newClosedSolutions]
-}
-
+// start with a single '(' if no solutions yet
+// tack on a single '(' to all new solutions
+const generateNewSolutions = solutions =>
+    solutions.length == 0 ? ['(']
+        : [...solutions, ...closeUnclosedNewSolutions(solutions)].map(s => s + '(')
 
 // solution
 const generateParentheses = generateParenthesesR([])
