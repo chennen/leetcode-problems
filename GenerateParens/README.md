@@ -6,7 +6,6 @@ Given n pairs of parentheses, write a function to generate all combinations of w
 ```
 Input: n = 3
 Output: ["((()))","(()())","(())()","()(())","()()()"]
-Output: ['((()))','(()())',         '()(())','()()()' ]
 ```
 
 ### Example 2:
